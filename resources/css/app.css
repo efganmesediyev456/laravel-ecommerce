@@ -1,0 +1,13 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'admin-lte/dist/css/adminlte.css';
+@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+
+@import 'admin-lte/plugins/jqvmap/jqvmap.min.css';
+@import 'admin-lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css');
+
+@import 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css';
+@import 'admin-lte/plugins/daterangepicker/daterangepicker.css';
