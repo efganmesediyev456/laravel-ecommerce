@@ -81,7 +81,7 @@
                                     </td>
                                     <td>
                                     <a type="button" class="btn btn-block btn-success btn-sm" href="{{ route('admin.edit.slider',['slider'=>$slider->link]) }}">Edit</a>
-                                    <button type="button" class="btn btn-block btn-danger btn-sm" wire:click="deleteSlider({{ $slider->id }})">Delete</button>
+                                    <button type="button" class="btn btn-block btn-danger btn-sm" onclick="confirm('Eminsen silmek ucun?') || event.stopImmediatePropagation()" wire:click="deleteSlider({{ $slider->id }})">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach

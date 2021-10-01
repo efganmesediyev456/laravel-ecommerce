@@ -37,6 +37,9 @@
                   Launch Default Modal
                 </button>
 
+                @if(session()->has("message"))
+                    <div class="alert alert-success">{{  session('message') }}</div>
+                @endif
     
 
                 <table  class="table table-bordered table-striped" >
@@ -63,7 +66,7 @@
                                     </td>
                                     <td>
                                     <button type="button" class="btn btn-block btn-success btn-sm" wire:click="editCategory({{ $cat }})">Edit</button>
-                                    <button type="button" class="btn btn-block btn-danger btn-sm" wire:click="deleteCategory({{ $cat->id }})">Delete</button>
+                                    <button type="button" onclick="confirm('Eminsen silmek ucun?') || event.stopImmediatePropagation()" class="btn btn-block btn-danger btn-sm" wire:click="deleteCategory({{ $cat->id }})">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach

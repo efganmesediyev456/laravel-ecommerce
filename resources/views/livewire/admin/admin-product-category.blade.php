@@ -89,7 +89,7 @@
                                     </td>
                                     <td>
                                     <button type="button" class="btn btn-block btn-success btn-sm" wire:click="editCategory({{ $pro }})">Edit</button>
-                                    <button type="button" class="btn btn-block btn-danger btn-sm" wire:click="deleteProduct({{ $pro->id }})">Delete</button>
+                                    <button type="button" onclick="confirm('Eminsen silmek ucun?') || event.stopImmediatePropagation()" class="btn btn-block btn-danger btn-sm" wire:click="deleteProduct({{ $pro->id }})">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach

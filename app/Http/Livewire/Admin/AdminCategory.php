@@ -44,7 +44,7 @@ class AdminCategory extends Component
 
     public function deleteCategory($id){
         Category::find($id)->delete();
-        session()->flash('message','Category has been created successfully');
+        session()->flash('message','Category has been deleted successfully');
     }
 
     public function generateSlug(){
