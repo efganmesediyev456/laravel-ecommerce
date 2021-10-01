@@ -43,8 +43,7 @@ class AdminAddHomeSliderComponent extends Component
     }
 
     public function save(){
-
-
+        
        $this->validate();
 
         $slider=new HomePageSlider();
