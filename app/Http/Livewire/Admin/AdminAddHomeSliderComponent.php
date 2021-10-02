@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use App\Models\HomePageSlider;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Http\Request;
 
 class AdminAddHomeSliderComponent extends Component
 {
@@ -23,6 +24,7 @@ class AdminAddHomeSliderComponent extends Component
 
     public function render()
     {
+        
         $sliders=HomePageSlider::paginate(10);
         return view('livewire.admin.admin-add-home-slider-component',compact('sliders'))->layout('layouts.admin');
     }
@@ -40,6 +42,22 @@ class AdminAddHomeSliderComponent extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
+    }
+
+    public function upload_image_cke(Request $request){
+        if ($request->hasFile('image')) {
+            $originName = $request->file('image')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+    
+            $request->file('image')->move(public_path('media'), $fileName);
+    
+            $url = asset('media/' . $fileName);
+            return $url;
+            
+    
+        }
     }
 
     public function save(){

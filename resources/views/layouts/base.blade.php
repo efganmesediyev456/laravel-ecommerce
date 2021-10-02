@@ -17,7 +17,9 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css')}}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.4.0/nouislider.min.css" integrity="sha512-dMN8bVG0nEGqfp4Aa7m8RfO9bWkIn7JOPhBClqxGo/C+38hVJD9mtk3/s+JMEBEW7Ze9E7XoGcm+yh7Y4Kk2fw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @livewireStyles
+    
+	@livewireStyles
+	@stack('css')
 </head>
 <body class="home-page home-01 ">
 

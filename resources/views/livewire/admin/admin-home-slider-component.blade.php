@@ -62,7 +62,7 @@
                                         {{$slider->id}}
                                     </td>
                                     <td>
-                                        {{$slider->title}}
+                                        {!! $slider->title !!}
                                     </td>
                                     <td>
                                         {{$slider->subtitle}}
