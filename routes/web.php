@@ -61,4 +61,6 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function () {
    Route::get('admin/edit/slider/{slider}',AdminEditHomeSliderComponent::class)->name('admin.edit.slider');
    Route::get('admin/country/product',HomeCountryProduct::class)->name('admin.country.product');
    Route::get('admin/sale',AdminSalesProduct::class)->name('admin.sales');
+
+   Route::post('ckeditor/upload', [AdminAddHomeSliderComponent::class,'upload_image_cke'])->name('ckeditor.upload');
 });

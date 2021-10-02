@@ -1,3 +1,17 @@
+@push("css")
+<style>
+    .wishlist-heart{
+        font-size:50px;
+        position: absolute;
+        top:0;
+        right:0;
+        cursor:pointer;
+    }
+    .product{
+        position: relative;
+    }
+</style>
+@endpush
 <main id="main" class="main-site left-sidebar">
 
 <div class="container">
@@ -58,10 +72,19 @@
 
                 <ul class="product-list grid-products equal-container">
 
+
+                    @php
+
+                    $wishlist_array=Cart::instance("wishlist")->content()->pluck("id");
+                 
+                    @endphp
+
+                   
+
                     @foreach($products as $product)
-                    <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                    <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 last">
                         <div class="product product-style-3 equal-elem ">
-                            <div class="product-thumnail">
+                            <div class="product-thumnail" >
                                 <a href="detail.html" title="{{ $product->name }}">
                                     <figure><img src="{{ asset('assets/images/products/'.$product->image) }}" alt="{{ $product->name }}"></figure>
                                 </a>
@@ -70,6 +93,14 @@
                                 <a href="{{ route('product.details',['slug'=>$product->slug]) }}" class="product-name"><span> {{ Str::limit($product->name, 20) }} </span></a>
                                 <div class="wrap-price"><span class="product-price">${{ $product->regular_price }}</span></div>
                                 <a href="#" wire:click="store({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})" class="btn add-to-cart">Add To Cart</a>
+                            </div>
+                            <div class="wishlist-heart">
+                                @if($wishlist_array->contains($product->id))
+                                    <a onclick="event.preventDefault()" style="color:red;" wire:click="wishlistadd({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i class="fa fa-heart"></i></a>
+                                @else
+                                <a onclick="event.preventDefault()" wire:click="wishlistadd({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i class="fa fa-heart"></i></a>
+                                @endif
+                               
                             </div>
                         </div>
                     </li>

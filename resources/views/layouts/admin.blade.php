@@ -37,6 +37,10 @@
   <!-- select2 -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css')}}">
   <link rel="stylesheet" href="{{ asset('admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+  <!-- ckeditor5 -->
+
+  <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.min.js" integrity="sha512-kZv5Zq4Cj/9aTpjyYFrt7CmyTUlvBday8NGjD9MxJyOY/f2UfRYluKsFzek26XWQaiAp7SZ0ekE7ooL9IYMM2A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
