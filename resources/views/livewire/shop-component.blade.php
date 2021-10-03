@@ -4,11 +4,18 @@
         font-size:50px;
         position: absolute;
         top:0;
-        right:0;
+        right:15px;
         cursor:pointer;
+        
     }
     .product{
         position: relative;
+    }
+    .wishlist-heart i{
+        color:white;
+    }
+    .wishlist-heart i:hover{
+        color:yellow;
     }
 </style>
 @endpush
@@ -78,9 +85,7 @@
                     $wishlist_array=Cart::instance("wishlist")->content()->pluck("id");
                  
                     @endphp
-
-                   
-
+                    
                     @foreach($products as $product)
                     <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 last">
                         <div class="product product-style-3 equal-elem ">
@@ -96,7 +101,7 @@
                             </div>
                             <div class="wishlist-heart">
                                 @if($wishlist_array->contains($product->id))
-                                    <a onclick="event.preventDefault()" style="color:red;" wire:click="wishlistadd({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i class="fa fa-heart"></i></a>
+                                    <a onclick="event.preventDefault()" ><i class="fa fa-heart" style="color:yellow"></i></a>
                                 @else
                                 <a onclick="event.preventDefault()" wire:click="wishlistadd({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i class="fa fa-heart"></i></a>
                                 @endif
