@@ -23,9 +23,11 @@ class ShopComponent extends Component
         $this->slider_max=1000;
     }
     public function store($product_id,$product_name,$product_price){
-        dd("salam");
-        Cart::add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
+       
+
+        Cart::instance("cart")->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
         session()->flash('success_message','Item added in Cart');
+        $this->emitTo("cart-count-add-component","refreshComponent");
         return redirect()->route('product.cart');
     }
     
@@ -46,6 +48,11 @@ class ShopComponent extends Component
     }
 
     public function wishlistadd($product_id,$product_name,$product_price){
+        
+       
         Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
+ 
+
+        $this->emitTo("wish-count-add-component","refreshComponent");
     }
 }
