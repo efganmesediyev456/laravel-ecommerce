@@ -14,6 +14,7 @@ use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
+use App\Http\Livewire\Wishlistshowcomponent;
 use Database\Factories\ProductFactory;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,8 @@ Route::get('/card',CardComponent::class)->name('product.cart');
 Route::get('/product/{slug}',DetailsComponent::class)->name('product.details');
 
 Route::get('/product-category/{category}',CategoryComponent::class)->name('category.product');
+Route::get('/wishlist',Wishlistshowcomponent::class)->name('wishlist');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
