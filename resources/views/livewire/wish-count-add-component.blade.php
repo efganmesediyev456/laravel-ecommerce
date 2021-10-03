@@ -1,3 +1,4 @@
+
 <div class="wrap-icon-section wishlist">
 								<a href="#" class="link-direction">
 									<i class="fa fa-heart" aria-hidden="true"></i>
@@ -7,3 +8,4 @@
 									</div>
 								</a>
 							</div>
+                     

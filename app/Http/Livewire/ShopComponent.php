@@ -30,6 +30,17 @@ class ShopComponent extends Component
         $this->emitTo("cart-count-add-component","refreshComponent");
         return redirect()->route('product.cart');
     }
+    public function removeWishListItem($id){
+        
+        foreach(Cart::instance("wishlist")->content() as $product){
+           
+            if($product->id==$id){
+                Cart::instance("wishlist")->remove($product->rowId);
+                $this->emitTo("wish-count-add-component","refreshComponent");
+                return;
+            }
+        }
+    }
     
     public function render()
     {

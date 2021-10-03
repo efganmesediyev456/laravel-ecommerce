@@ -101,7 +101,7 @@
                             </div>
                             <div class="wishlist-heart">
                                 @if($wishlist_array->contains($product->id))
-                                    <a onclick="event.preventDefault()" ><i class="fa fa-heart" style="color:yellow"></i></a>
+                                    <a onclick="event.preventDefault()" wire:click="removeWishListItem({{ $product->id }})" href="#" ><i class="fa fa-heart" style="color:yellow"></i></a>
                                 @else
                                 <a onclick="event.preventDefault()" wire:click="wishlistadd({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i class="fa fa-heart"></i></a>
                                 @endif
