@@ -120,13 +120,13 @@
 
 						
 						<div class="wrap-icon right-section">
-							@if(Cart::instance('wishlist')->count()>0)
+							
 							@livewire("wish-count-add-component")
-							@endif
+						
 							<div class="wrap-icon-section minicart">
-								@if(Cart::instance('cart')->count()>0)
-								@livewire("cart-count-add-component")
-								@endif
+								
+							@livewire("cart-count-add-component")
+								
 							</div>
 							<div class="wrap-icon-section show-up-after-1024">
 								<a href="#" class="mobile-navigation">

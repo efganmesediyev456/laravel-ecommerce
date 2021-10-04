@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Livewire\Admin\AdminAddCouponComponent;
 use App\Http\Livewire\Admin\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminCategory;
+use App\Http\Livewire\Admin\AdminCouponComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\AdminEditCouponComponent;
 use App\Http\Livewire\Admin\AdminEditHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminProductCategory;
@@ -42,6 +45,11 @@ Route::get('/product/{slug}',DetailsComponent::class)->name('product.details');
 Route::get('/product-category/{category}',CategoryComponent::class)->name('category.product');
 Route::get('/wishlist',Wishlistshowcomponent::class)->name('wishlist');
 
+Route::get('/coupon',AdminCouponComponent::class)->name('coupon.index');
+Route::get('/coupon/create',AdminAddCouponComponent::class)->name('coupon.create');
+Route::get('/coupon/edit/{id}',AdminEditCouponComponent::class)->name('coupon.edit');
+
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -64,6 +72,5 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function () {
    Route::get('admin/edit/slider/{slider}',AdminEditHomeSliderComponent::class)->name('admin.edit.slider');
    Route::get('admin/country/product',HomeCountryProduct::class)->name('admin.country.product');
    Route::get('admin/sale',AdminSalesProduct::class)->name('admin.sales');
-
    Route::post('ckeditor/upload', [AdminAddHomeSliderComponent::class,'upload_image_cke'])->name('ckeditor.upload');
 });
