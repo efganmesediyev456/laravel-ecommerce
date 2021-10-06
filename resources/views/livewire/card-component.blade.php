@@ -1,5 +1,6 @@
 <main id="main" class="main-site">
 
+
 <div class="container">
 
     <div class="wrap-breadcrumb">
@@ -10,7 +11,8 @@
     </div>
     <div class=" main-content-area">
 
-        <div class="wrap-iten-in-cart">
+       @if(Cart::instance("cart")->count()>0)
+       <div class="wrap-iten-in-cart">
             <h3 class="box-title">Products Name</h3>
             @if(session()->has("success_message"))
                 <div class="alert alert-success">
@@ -36,6 +38,7 @@
                             <a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{$c->rowId}}')"></a>
                             <a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQuantity('{{$c->rowId}}')"></a>
                         </div>
+                        <div class="text-muted text-center"><a wire:click="saveForLater('{{ $c->rowId }}')" href="#">Save For Later</a></div>
                     </div>
                     <div class="price-field sub-total"><p class="price">${{ $c->subtotal }}</p></div>
                     <div class="delete">
@@ -56,15 +59,42 @@
             <div class="order-summary">
                 <h4 class="title-box">Order Summary</h4>
                 <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ Cart::instance('cart')->subtotal() }}</b></p>
-                <p class="summary-info"><span class="title">Tax</span><b class="index">${{ Cart::instance('cart')->tax() }}</b></p>
-                <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
-                <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{Cart::instance('cart')->total()}}</b></p>
-            </div>
+              
+                     @if(session()->has("coupon"))
+                     <p class="summary-info"><span class="title">Discount ({{ session()->get("coupon")['code'] }})<a wire:click.prevent="removeCoupon" href="#"><i class="fa fa-times text-danger"></i></a></span><b class="index">${{ $discount }}</b></p>
+                     <p class="summary-info"><span class="title">Tax ({{ config('cart.tax') }}%)</span><b class="index">${{ $taxAfterDiscount }}</b></p>
+                     <p class="summary-info"><span class="title">Subtotal with Discount </span><b class="index">${{ $subtotalAfterDiscount }}</b></p>
+                     <p class="summary-info"><span class="title">Total</span><b class="index">${{ $totalAfterDiscount }}</b></p>
+                    @else
+                     <p class="summary-info"><span class="title">Shipping</span><b class="index">Free Shipping</b></p>
+                     <p class="summary-info total-info "><span class="title">Total</span><b class="index">${{Cart::instance('cart')->total()}}</b></p>
+           
+                    @endif
+                 </div>
             <div class="checkout-info">
+                @if(!session()->has("coupon"))
                 <label class="checkbox-field">
-                    <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox"><span>I have promo code</span>
+                    <input class="frm-input " name="have-code" id="have-code" value="" type="checkbox" wire:model="showInputCode"><span>I have promo code</span>
                 </label>
-                <a class="btn btn-checkout" href="checkout.html">Check out</a>
+                @endif
+                @if($showInputCode==true)
+                @if(session()->has("message"))
+                    <div class="alert alert-danger" role="danger">{{ session("message") }}</div>
+                @endif
+              
+                @if(!session()->has("coupon"))
+                <form action="" wire:submit.prevent="addCouponCode" >
+                    <div class="form-row form-group">
+                        <label for="">Coupon Code</label>
+                        <input type="text" wire:model="couponCode" class="form-control"  style="width:20%;">
+                    </div>
+                    <div class="form-row form-group">
+                        <input type="submit"  class="btn btn-primary btn-sm" value="elave et">
+                    </div>
+                </form>
+                @endif
+                @endif
+                <a class="btn btn-checkout" href="" wire:click.prevent="checkout">Check out</a>
                 <a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
             </div>
             <div class="update-clear">
@@ -72,6 +102,61 @@
                 <a class="btn btn-update" href="#">Update Shopping Cart</a>
             </div>
         </div>
+       @else
+
+       <div class="text-center">
+           <h1>No Cart Data</h1>
+           <h2>Add Cart Data Item</h2>
+           <h3><a href="/shop" class="btn btn-success">Add Item</a> </h3>
+       </div>
+
+       @endif
+
+
+
+        <!-- burdan  -->
+        <hr>
+        <div class="wrap-iten-in-cart">
+           
+         
+        <h3 class="box-title">Save For Later </h3>
+
+           
+            <ul class="products-cart">
+
+                @if(Cart::instance('saveForLater')->count()>0)
+                @foreach(Cart::instance('saveForLater')->content() as $c)
+                <li class="pr-cart-item">
+                    <div class="product-image">
+                        <figure><img src="{{ asset('assets/images/products/'.$c->model->image) }}" alt=""></figure>
+                    </div>
+                    <div class="product-name">
+                        <a class="link-to-product" href="{{ route('product.details',['slug'=>$c->model->slug]) }}">{{ $c->model->name }}</a>
+                    </div>
+
+                    <div class="price-field produtc-price"><p class="price">${{ $c->model->sale_price > 0 ? $c->model->sale_price : $c->model->regular_price }}</p></div>
+                    <div class="quantity">
+                        <div class="quantity-input">
+                            <input type="text" name="product-quatity" value="{{ $c->qty }}" data-max="120" pattern="[0-9]*" >									
+                        </div>
+                        <div class="text-muted text-center"><a wire:click="moveToCart('{{ $c->rowId }}')" href="#">Move To Cart</a></div>
+                    </div>
+                    <div class="price-field sub-total"><p class="price">${{ $c->subtotal }}</p></div>
+                    <div class="delete">
+                        <a href="#" class="btn btn-delete" title="">
+                            <span>Delete from your cart</span>
+                            <i class="fa fa-times-circle" aria-hidden="true" wire:click.prevent="destroy('{{ $c->rowId }}')"></i>
+                        </a>
+                    </div>
+                </li>	
+                @endforeach
+                @else
+                <h1 class="alert-danger alert">No Cart Save For Later</h1>
+                @endif
+            </ul>
+        </div>
+        <!-- burdan -->
+
 
         <div class="wrap-show-advance-info-box style-1 box-in-site">
             <h3 class="title-box">Most Viewed Products</h3>

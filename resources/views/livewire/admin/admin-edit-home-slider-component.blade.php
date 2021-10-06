@@ -36,7 +36,7 @@
                   @endif
                 <form action="" wire:submit.prevent="save">
                 <label for="">Title</label>
-                <input class="form-control form-control-lg" type="text" placeholder="" wire:model="title">
+                <input class="form-control form-control-lg" id="editor" type="text" placeholder="" wire:model="title">
                 <br>
                 <label for="">Subtitle</label>
                 <input class="form-control form-control-lg" type="text" placeholder="" wire:model="subtitle">
@@ -75,3 +75,29 @@
     </section>
     <!-- /.content -->
   </div>
+
+
+
+  @push("script")
+
+  <script>
+    $('#editor').summernote(
+
+    {
+      height: 450,
+      callbacks: {
+    onChange: function(contents, $editable) {
+        @this.set('title',contents);
+      
+    },
+    onImageUpload: function(image) {
+            uploadImage(image[0]);
+        }
+  }
+
+    }
+    )
+
+
+  </script>
+  @endpush

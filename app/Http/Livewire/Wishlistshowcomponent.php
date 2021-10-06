@@ -12,6 +12,13 @@ class Wishlistshowcomponent extends Component
       
         return view('livewire.wishlistshowcomponent')->layout("layouts.base");
     }
+    public function movetoCart($rowId){
+        $item=Cart::instance("wishlist")->get($rowId);
+        Cart::instance("wishlist")->remove($rowId);
+        Cart::instance("cart")->add($item->id,$item->name,1,$item->price)->associate('App\Models\Product');
+        $this->emitTo("cart-count-add-component","refreshComponent");
+        $this->emitTo("wish-count-add-component","refreshComponent");
+    }
     public function removeWishListItem($id){
         
         foreach(Cart::instance("wishlist")->content() as $product){
