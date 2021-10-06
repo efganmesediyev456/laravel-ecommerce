@@ -147,10 +147,44 @@
 				
 				
 					<div class="summary summary-checkout">
-					<div class="summary-item payment-method">
+						@if($paymentmode=="card")
+						<div class="summary-item payment-method">
+							@if(Session::has('stripe_error'))
+							<div class="alert alert-danger">{{ Session::get("stripe_error")}}</div>
+							@endif
 						<h4 class="title-box">Payment Method</h4>
-						<p class="summary-info"><span class="title">Check / Money order</span></p>
-						<p class="summary-info"><span class="title">Credit Cart (saved)</span></p>
+					
+						<div class="wrap-address-billing">
+						<p class="row-in-form">
+								<label for="fname">Card Number<span>*</span></label>
+								<input id="fname" type="text" name="fname" value="" placeholder="Card Number" wire:model="card_num">
+								@error("card_num") <span class="text-danger">{{ $message }}</span> @enderror
+						</p>
+
+						<p class="row-in-form">
+								<label for="fname">Expiry Month<span>*</span></label>
+								<input id="fname" type="text" name="fname" value="" placeholder="MM" wire:model="exp_month">
+								@error("exp_month") <span class="text-danger">{{ $message }}</span> @enderror
+						</p>
+
+						<p class="row-in-form">
+								<label for="fname">Expiry Year<span>*</span></label>
+								<input id="fname" type="text" name="fname" value="" placeholder="YYYY" wire:model="exp_year">
+								@error("exp_year") <span class="text-danger">{{ $message }}</span> @enderror
+						</p>
+
+						<p class="row-in-form">
+								<label for="fname">CVC<span>*</span></label>
+								<input id="fname" type="text" name="fname" value="" placeholder="CVC" wire:model="cvc">
+								@error("cvc") <span class="text-danger">{{ $message }}</span> @enderror
+						</p>
+
+					</div>
+						@endif
+					
+
+
+
 						<div class="choose-payment-methods">
 							<label class="payment-method">
 								<input name="payment-method" id="payment-method-bank" value="cod" type="radio" wire:model="paymentmode">
@@ -171,7 +205,7 @@
 							</label>
 							@error("paymentmode") <span class="text-danger">{{ $message }}</span> @enderror
 						</div>
-						<p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">$100.00</span></p>
+						<p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{ session()->get("checkout")["total"] }}</span></p>
 						<a href="#" class="btn btn-medium" wire:click.prevent="odeme">Place order now</a>
 					</div>
 					<div class="summary-item shipping-method">
