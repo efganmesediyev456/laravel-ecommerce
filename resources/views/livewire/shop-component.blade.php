@@ -90,14 +90,14 @@
                     <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 last">
                         <div class="product product-style-3 equal-elem ">
                             <div class="product-thumnail" >
-                                <a href="detail.html" title="{{ $product->name }}">
+                                <a href="{{ route('product.details',['slug'=>$product->slug]) }}" title="{{ $product->name }}">
                                     <figure><img src="{{ asset('assets/images/products/'.$product->image) }}" alt="{{ $product->name }}"></figure>
                                 </a>
                             </div>
                             <div class="product-info">
                                 <a href="{{ route('product.details',['slug'=>$product->slug]) }}" class="product-name"><span> {{ Str::limit($product->name, 20) }} </span></a>
                                 <div class="wrap-price"><span class="product-price">${{ $product->regular_price }}</span></div>
-                                <a href="#" wire:click="store({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})" class="btn add-to-cart">Add To Cart</a>
+                                <a href="#" wire:click.prevent="store({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})" class="btn add-to-cart">Add To Cart</a>
                             </div>
                             <div class="wishlist-heart">
                                 @if($wishlist_array->contains($product->id))

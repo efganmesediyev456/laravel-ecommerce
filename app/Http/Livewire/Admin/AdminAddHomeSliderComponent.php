@@ -45,6 +45,7 @@ class AdminAddHomeSliderComponent extends Component
     }
 
     public function upload_image_cke(Request $request){
+        
         if ($request->hasFile('image')) {
             $originName = $request->file('image')->getClientOriginalName();
             $fileName = pathinfo($originName, PATHINFO_FILENAME);

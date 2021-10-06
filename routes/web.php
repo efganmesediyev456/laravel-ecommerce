@@ -17,6 +17,7 @@ use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
+use App\Http\Livewire\ThankYouComponent;
 use App\Http\Livewire\Wishlistshowcomponent;
 use Database\Factories\ProductFactory;
 use Illuminate\Support\Facades\Route;
@@ -34,9 +35,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',HomeComponent::class);
 
-Route::get('/shop',ShopComponent::class);
+Route::get('/shop',ShopComponent::class)->name("shop");
 
-Route::get('/checkout',CheckoutComponent::class);
+Route::get('/checkout',CheckoutComponent::class)->name("checkout");
 
 Route::get('/card',CardComponent::class)->name('product.cart');
 
@@ -48,6 +49,8 @@ Route::get('/wishlist',Wishlistshowcomponent::class)->name('wishlist');
 Route::get('/coupon',AdminCouponComponent::class)->name('coupon.index');
 Route::get('/coupon/create',AdminAddCouponComponent::class)->name('coupon.create');
 Route::get('/coupon/edit/{id}',AdminEditCouponComponent::class)->name('coupon.edit');
+
+Route::get('/thankyou',ThankYouComponent::class)->name('thankyou');
 
 
 

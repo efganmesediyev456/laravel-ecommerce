@@ -6,6 +6,7 @@ use App\Models\Coupon;
 use Carbon\Carbon;
 use Livewire\Component;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class CardComponent extends Component
 {
@@ -51,6 +52,7 @@ class CardComponent extends Component
     {
         
        
+       
         if(session()->has("coupon")){
             if(session()->get("coupon")["cart_value"] > Cart::instance("cart")->subtotal()){
                 session()->forget("coupon");
@@ -59,6 +61,7 @@ class CardComponent extends Component
                
             }
         }
+        $this->discountParse();
         return view('livewire.card-component')->layout('layouts.base');
     }
 
@@ -77,7 +80,7 @@ class CardComponent extends Component
     }
     public function addCouponCode(){
 
-        $coupon=Coupon::whereCode($this->couponCode)->where('expiry_date','>',Carbon::today())->where('cart_value',"<=",Cart::instance("cart")->subtotal())->first();
+        $coupon=Coupon::whereCode($this->couponCode)->where('expiry_date','>=',Carbon::today())->where('cart_value',"<=",Cart::instance("cart")->subtotal())->first();
 
         if(!$coupon){
             session()->flash("message","No coupon Value");
@@ -95,7 +98,37 @@ class CardComponent extends Component
         
     }
 
+    public function checkout(){
+        if(Auth::check()){
+            return redirect()->route("checkout");
+        }else{
+            return redirect()->route("login");
+        }
+    }
+
+    public function discountParse(){
+        
+        if(session()->has("coupon")){
+            session()->put("checkout",[
+                "discount"=>$this->discount,
+                "subtotal"=>$this->subtotalAfterDiscount,
+                "tax"=>$this->taxAfterDiscount,
+                "total"=>$this->totalAfterDiscount,
+            ]);
+        }else{
+          
+            session()->put("checkout",[
+                "discount"=>0,
+                "subtotal"=>Cart::instance("cart")->subtotal(),
+                "tax"=>Cart::instance("cart")->tax(),
+                "total"=>Cart::instance("cart")->total(),
+            ]);
+            
+        }
+    }
+
     public function calculateDiscounts(){
+        
         if(session()->has("coupon")){
             if(session()->get("coupon")["type"]=="fixed"){
                 $this->discount=session()->get("coupon")["value"];
@@ -105,8 +138,8 @@ class CardComponent extends Component
             $this->subtotalAfterDiscount=Cart::instance("cart")->subtotal()-$this->discount;
             $this->taxAfterDiscount=($this->subtotalAfterDiscount*config("cart.tax"))/100;
             $this->totalAfterDiscount=$this->taxAfterDiscount+$this->subtotalAfterDiscount;
-
         }
+
     }
 
     public function removeCoupon(){
