@@ -33,12 +33,11 @@
               <!-- /.card-header -->
               <div class="card-body">
 
-             
-
-              
-
               <div class="table-responsive">
 
+              @if(Session::has("message"))
+              <div class="alert alert-success">{{ Session::get("message") }}</div>
+              @endif
               <table  class="table table-bordered table-striped " id="table">
                   <thead>
                   <tr>
@@ -62,6 +61,7 @@
                     <th>Is Shipping Different</th>
                     <th>Created At</th>
                     <th>Action</th>
+                    <th>Status</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -128,6 +128,19 @@
                                     </td>
                     <td><a href="{{ route('admin.order.details',['order_id'=>$order->id]) }}" class="btn btn-success">Details</a></td>
 
+                    <td>
+                    <div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Status
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="#" wire:click.prevent="updateOrder({{ $order->id }},'delivered')">Delivered</a>
+    <a class="dropdown-item" href="#" wire:click.prevent="updateOrder({{ $order->id }},'canceled')">Canceled</a>
+  </div>
+</div>
+                    </td>
+
                                 </tr>
                             @endforeach
                  
@@ -154,6 +167,7 @@
                     <th>Is Shipping Different</th>
                     <th>Created At</th>
                     <th>Action</th>
+                    <th>Status</th>
                   </tr>
                   </tfoot>
                 </table>
