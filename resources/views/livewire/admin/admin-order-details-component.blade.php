@@ -32,6 +32,57 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+
+
+                    
+                    
+                                
+                                @if($order->status=="delivered")
+                                <div class="card text-white bg-primary mb-3" >
+                                <div class="card-header">Order Details</div>
+                                <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    Order Id <span>{{ $order->id }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    Order Date <span> {{ $order->created_at }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    Status <span> {{ $order->status }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    delivry date <span> {{ $order->delivered_date }}</span>
+                                </div>
+                                
+                                </div>
+                                </div>
+                                @endif
+
+
+                                @if($order->status=="canceled")
+                                <div class="card text-white bg-primary mb-3" >
+                                <div class="card-header">Order Details</div>
+                                <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    Order Id <span>{{ $order->id }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    Order Date <span> {{ $order->created_at }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    Status <span> {{ $order->status }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    delivry date <span> {{ $order->canceled_date }}</span>
+                                </div>
+                                </div>
+                                </div>
+                                @endif
+
+
+
+
+
                                     <div class="row">
                                         <div class="col-5 col-sm-3">
                                             <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
@@ -40,10 +91,17 @@
                                             <a class="nav-link" id="transaction-tab" data-toggle="pill" href="#transaction" role="tab" aria-controls="transaction" aria-selected="false">Transaction</a>
                                             </div>
                                         </div>
+
+                                        
+
                                         <div class="col-7 col-sm-9">
                                             <div class="tab-content" id="vert-tabs-tabContent">
                                                     <div class="tab-pane text-left fade show active" id="order-items" role="tabpanel" aria-labelledby="order-items-tab">
                                                        <div class="table-responsive">
+
+
+                                                       
+
                                                        <table class="table">
                                                                 <thead>
                                                                     <tr>
@@ -93,6 +151,7 @@
                                                                         <th>
                                                                             Created At
                                                                         </th>
+
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
