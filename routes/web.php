@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Http\Livewire\Admin\AdminAddCouponComponent;
 use App\Http\Livewire\Admin\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminCategory;
@@ -8,8 +9,10 @@ use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\AdminEditCouponComponent;
 use App\Http\Livewire\Admin\AdminEditHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminHomeSliderComponent;
+use App\Http\Livewire\Admin\AdminOrderDetailsComponent;
 use App\Http\Livewire\Admin\AdminProductCategory;
 use App\Http\Livewire\Admin\HomeCountryProduct;
+use App\Http\Livewire\AdminOrderViewComponent;
 use App\Http\Livewire\AdminSalesProduct;
 use App\Http\Livewire\CardComponent;
 use App\Http\Livewire\CategoryComponent;
@@ -54,6 +57,7 @@ Route::get('/thankyou',ThankYouComponent::class)->name('thankyou');
 
 
 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -76,4 +80,8 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function () {
    Route::get('admin/country/product',HomeCountryProduct::class)->name('admin.country.product');
    Route::get('admin/sale',AdminSalesProduct::class)->name('admin.sales');
    Route::post('ckeditor/upload', [AdminAddHomeSliderComponent::class,'upload_image_cke'])->name('ckeditor.upload');
+   Route::get('admin/order',AdminOrderViewComponent::class)->name('admin.order');
+   Route::get('admin/order/details/{order_id}',AdminOrderDetailsComponent::class)->name('admin.order.details');
 });
+
+Route::get("efgan",[TestController::class,"index"]);
