@@ -9,6 +9,7 @@ use Livewire\Component;
 class UserDetailDashboardController extends Component
 {
     public $order_id;
+    public $test;
     public function mount($id){
         $this->order_id=$id;
     }
