@@ -180,7 +180,8 @@ class CheckoutComponent extends Component
             $this->resetCart();
         }else if($this->paymentmode=="card"){
 
-            $stripe=Stripe::make(env("STRIPE_KEY"));
+           
+            $stripe=Stripe::make(config("app.stripe_key"));
             try {
                
                 $token=$stripe->tokens()->create([
@@ -231,7 +232,7 @@ class CheckoutComponent extends Component
 
                 if($charge["status"]=="succeeded"){
                     $this->make_transaction($order->id,"approved");
-                    // $this->resetCart();
+                    $this->resetCart();
                     return redirect()->route("thankyou");
                 }else{
                     session()->flash("stripe_error","Transaction Error");

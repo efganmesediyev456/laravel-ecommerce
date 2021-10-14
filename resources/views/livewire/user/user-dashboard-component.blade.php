@@ -2,12 +2,17 @@
 
 <div class="row" style="margin-top: 40px;">
     <div class="col-md-8 col-md-offset-2 m-2">
+        
     <div class="panel panel-danger">
   <!-- Default panel contents -->
   <div class="panel-heading">User Order Details</div>
+  
 
   <!-- Table -->
   <div class="table-responsive">
+
+
+
   <table class="table">
         <thead>
             <tr>
@@ -30,6 +35,7 @@
                 <th>Status</th>
                 <th>Shipping</th>
                 <th>Created at</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody>
@@ -54,6 +60,9 @@
                     <td>{{ $order->status }}</td>
                     <td>{{ $order->is_shipping_different == 1 ? "Shipping":"" }}</td>
                     <td>{{ $order->created_at->diffForHumans() }}</td>
+                    <td><a class="btn btn-primary" href="{{ route('user.order.detail',['id'=>$order->id]) }}">Details</a></td>
+                    
+                    
 
                 </tr>
                 @endforeach

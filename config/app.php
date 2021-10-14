@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'stripe_key'=>'sk_test_udw5xHbjZxRIsDmnyAadtdrQ00GwZGVqjH',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
