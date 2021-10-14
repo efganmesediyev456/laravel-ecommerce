@@ -22,6 +22,7 @@ use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\ThankYouComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
+use App\Http\Livewire\User\UserDetailDashboardController;
 use App\Http\Livewire\Wishlistshowcomponent;
 use Database\Factories\ProductFactory;
 use Illuminate\Support\Facades\Route;
@@ -66,6 +67,7 @@ Route::get('/thankyou',ThankYouComponent::class)->name('thankyou');
 // front
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
    Route::get('user/dashboard',UserDashboardComponent::class)->name('dashboard');
+   Route::get('user/dashboard/order/{id}/details',UserDetailDashboardController::class)->name('user.order.detail');
 });
 
 //admin
