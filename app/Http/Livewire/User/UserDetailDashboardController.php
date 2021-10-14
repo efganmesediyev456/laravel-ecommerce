@@ -10,6 +10,7 @@ class UserDetailDashboardController extends Component
 {
     public $order_id;
     public $test;
+    public $test2;
     public function mount($id){
         $this->order_id=$id;
     }
