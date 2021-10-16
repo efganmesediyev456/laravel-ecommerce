@@ -21,6 +21,7 @@ use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\ThankYouComponent;
+use App\Http\Livewire\User\OrderItemReviewComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserDetailDashboardController;
 use App\Http\Livewire\Wishlistshowcomponent;
@@ -56,6 +57,8 @@ Route::get('/coupon/create',AdminAddCouponComponent::class)->name('coupon.create
 Route::get('/coupon/edit/{id}',AdminEditCouponComponent::class)->name('coupon.edit');
 
 Route::get('/thankyou',ThankYouComponent::class)->name('thankyou');
+
+Route::get('/user/order_item/review/{order_item_id}',OrderItemReviewComponent::class)->name('user.review');
 
 
 

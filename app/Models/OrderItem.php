@@ -19,4 +19,7 @@ class OrderItem extends Model
     public function category(){ 
         return $this->belongsTo(AdminCategory::class);
     }
+    public function review(){
+       return $this->hasOne(Review::class);
+    }
 }
