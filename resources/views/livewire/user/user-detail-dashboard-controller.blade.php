@@ -84,13 +84,13 @@
                                                                         <th>
                                                                             Price
                                                                         </th>
-                                                                        <th>
-                                                                            Quantity
-                                                                        </th>
+                                                                       
                                                                         
                                                                         <th>
                                                                             Created At
                                                                         </th>
+                                                                        
+                                                                       
 
 
                                                                     </tr>
@@ -134,14 +134,22 @@
                                                                                       {{$ord->order_id}}
                                                                                   </td>
                                                                                   <td>
-                                                                                      {{$ord->price}}
-                                                                                  </td>
-                                                                                  <td>
                                                                                       {{$ord->quantity}}
                                                                                   </td>
                                                                                   <td>
+                                                                                      {{$ord->price}}
+                                                                                  </td>
+                                                                                 
+                                                                                  <td>
                                                                                       {{$ord->created_at}}
                                                                                   </td>
+
+                                                                                 
+                                                                                  @if($ord->rstatus==false && $order->status=="delivered")
+                                                                                  <td>
+                                                                                      <a href="{{route('user.review',['order_item_id'=>$ord->id])}}">Write Review</a>
+                                                                                  </td>
+                                                                                  @endif
                                                                                   
                                                                             </tr>
                                                                         @endforeach
@@ -187,13 +195,12 @@
                                                                         <th>
                                                                             Price
                                                                         </th>
-                                                                        <th>
-                                                                            Quantity
-                                                                        </th>
+                                                                      
                                                                         
                                                                         <th>
                                                                             Created At
                                                                         </th>
+                                                                        
                                                                     </tr>
                                                                 </tfoot>
                                                         </table>
