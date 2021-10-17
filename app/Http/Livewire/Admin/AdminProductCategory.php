@@ -29,6 +29,7 @@ class AdminProductCategory extends Component
     public $product_id;
     public $stock_status;
     public $category_id;
+    public $images;
  
 
     public function mount(){
@@ -62,6 +63,16 @@ class AdminProductCategory extends Component
             $imageName=time().'.'.$this->image->extension();
             $this->image->storeAs('products',$imageName);
             $data['image']=$imageName;
+        }
+
+        if($this->images){
+            $imagesNames='';
+            foreach($this->images as $img){
+                $imageName=uniqid().'.'.$img->extension();
+                $img->storeAs('products',$imageName);
+                $imagesNames.=$imageName.',';
+            }
+            $data['images']=rtrim($imagesNames,',');
         }
        
 

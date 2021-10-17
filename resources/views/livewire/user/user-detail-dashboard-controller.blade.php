@@ -76,11 +76,12 @@
                                                                             featured
                                                                         </th>
                                                                         <th>
-                                                                            quantity
-                                                                        </th>
-                                                                        <th>
                                                                             Order Id
                                                                         </th>
+                                                                        <th>
+                                                                            quantity
+                                                                        </th>
+                                                                        
                                                                         <th>
                                                                             Price
                                                                         </th>
@@ -97,6 +98,7 @@
                                                                 </thead>
                                                                 <tbody>
                                                                         @foreach($order->order_items as $ord)
+                                                                       
                                                                             <tr>
                                                                                 <td>
                                                                                     {{$ord->id}}
@@ -137,7 +139,7 @@
                                                                                       {{$ord->quantity}}
                                                                                   </td>
                                                                                   <td>
-                                                                                      {{$ord->price}}
+                                                                                      {{number_format($ord->quantity * $ord->price,2)}}
                                                                                   </td>
                                                                                  
                                                                                   <td>

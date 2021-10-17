@@ -205,7 +205,7 @@
 							</label>
 							@error("paymentmode") <span class="text-danger">{{ $message }}</span> @enderror
 						</div>
-						<p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{ session()->get("checkout")["total"] }}</span></p>
+						<p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price"></span></p>
 						<a href="#" class="btn btn-medium" wire:click.prevent="odeme">Place order now</a>
 					</div>
 					<div class="summary-item shipping-method">

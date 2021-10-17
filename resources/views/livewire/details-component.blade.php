@@ -15,9 +15,21 @@
 					<div class="detail-media">
 						<div class="product-gallery">
 							<ul class="slides">
+								@php
+								$images=explode(',',$product->images);
+								@endphp
 								<li data-thumb="{{asset('assets/images/products/'.$product->image)}}">
+						
 									<img src="{{asset('assets/images/products/'.$product->image)}}" alt="product thumbnail" />
+									
 								</li>
+								@foreach($images as $img)
+								<li data-thumb="{{asset('assets/images/products/'.$img)}}">
+									
+									<img src="{{asset('assets/images/products/'.$img)}}" alt="product thumbnail" />
+									
+								</li>
+								@endforeach
 							</ul>
 						</div>
 					</div>
@@ -85,12 +97,12 @@
 					</div>
 					<div class="advance-info">
 						<div class="tab-control normal">
-							<a href="#description" class="tab-control-item active">description</a>
+							<a href="#description" class="tab-control-item ">description</a>
 							<a href="#add_infomation" class="tab-control-item">Addtional Infomation</a>
-							<a href="#review" class="tab-control-item">Reviews</a>
+							<a href="#review" class="tab-control-item active">Reviews</a>
 						</div>
 						<div class="tab-contents">
-							<div class="tab-content-item active" id="description">
+							<div class="tab-content-item " id="description">
 								{{$product->description}}
 							</div>
 							<div class="tab-content-item " id="add_infomation">
@@ -108,10 +120,11 @@
 									</tbody>
 								</table>
 							</div>
-							<div class="tab-content-item " id="review">
+							<div class="tab-content-item active " id="review">
 
 								<div class="wrap-review-form">
 
+									@if($product->orderitems->where("rstatus",1)->count() > 0)
 									<div id="comments">
 										<h2 class="woocommerce-Reviews-title">{{$product->orderitems->where("rstatus",1)->count()}} review for <span>{{ $product->name }}</span></h2>
 										<ol class="commentlist">
@@ -155,7 +168,7 @@
 															<time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >{{ Carbon\Carbon::parse($orderIten->review->created_at)->format("Y-m-d H:i:s") }} {{'  '.$orderIten->review->created_at->diffForHumans()}}</time>
 														</p>
 														<div class="description">
-															<p>{{ $orderIten->review->content }}</p>
+															<p>{{ $orderIten->review->comment }}</p>
 														</div>
 														@endforeach
 													</div>
@@ -163,6 +176,7 @@
 											</li>
 										</ol>
 									</div><!-- #comments -->
+									@endif
 
 									
 								</div>

@@ -63,7 +63,7 @@
                                             <li class="menu-item lang-menu menu-item-has-children parent">
                                                 <a title="English" href="#">My Account  {{ Auth::user()->name }}</a>
                                                 <ul class="submenu lang" >
-                                                <li class="menu-item" ><a title="hungary" href="{{ route('user.dashboard') }}">Dashboard</a> </li>             
+                                                <li class="menu-item" ><a title="hungary" href="{{ route('dashboard') }}">Dashboard</a> </li>             
                                                 <li class="menu-item" ><a title="hungary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('form').submit();">Logout</a></li>
                                                     <form action="{{ route('logout') }}" method="POST" id="form">
                                                         @csrf
