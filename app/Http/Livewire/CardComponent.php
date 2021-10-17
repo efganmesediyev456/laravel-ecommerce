@@ -53,6 +53,7 @@ class CardComponent extends Component
         
        
        
+
         if(session()->has("coupon")){
             if(session()->get("coupon")["cart_value"] > Cart::instance("cart")->subtotal()){
                 session()->forget("coupon");

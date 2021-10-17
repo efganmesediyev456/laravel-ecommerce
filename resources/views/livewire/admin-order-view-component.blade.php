@@ -170,7 +170,7 @@
                     <th>Status</th>
                   </tr>
                   </tfoot>
-                </table>
+            </table>
               </div>
 
 

@@ -13,21 +13,21 @@
 			<div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
 				<div class="wrap-product-detail">
 					<div class="detail-media">
-						<div class="product-gallery">
+						<div class="product-gallery" wire:ignore>
 							<ul class="slides">
 								@php
 								$images=explode(',',$product->images);
 								@endphp
 								<li data-thumb="{{asset('assets/images/products/'.$product->image)}}">
-						
+
 									<img src="{{asset('assets/images/products/'.$product->image)}}" alt="product thumbnail" />
-									
+
 								</li>
 								@foreach($images as $img)
 								<li data-thumb="{{asset('assets/images/products/'.$img)}}">
-									
+
 									<img src="{{asset('assets/images/products/'.$img)}}" alt="product thumbnail" />
-									
+
 								</li>
 								@endforeach
 							</ul>
@@ -36,25 +36,23 @@
 					<div class="detail-info">
 						<div class="product-rating">
 							<style>
-								.gristar{
-									color:gainsboro!important;
+								.gristar {
+									color: gainsboro !important;
 								}
 							</style>
 							@php
-								$raiting=0;
-								foreach($product->orderitems->where("rstatus",1) as $ord){
-									$raiting=$raiting+$ord->review->raiting;
-								}
+							$raiting=0;
+							foreach($product->orderitems->where("rstatus",1) as $ord){
+							$raiting=$raiting+$ord->review->raiting;
+							}
 							@endphp
-							@for($i=0;$i<5;$i++)
-							@if($i<$raiting)
-							<i class="fa fa-star" aria-hidden="true"></i>
-							@else 
-							<i class="fa fa-star gristar" aria-hidden="true"></i>
-							@endif
-							@endfor
-							<a href="#" class="count-review">({{$product->orderitems->where("rstatus",1)->count()}} review)</a>
-							
+							@for($i=0;$i<5;$i++) @if($i<$raiting) <i class="fa fa-star" aria-hidden="true"></i>
+								@else
+								<i class="fa fa-star gristar" aria-hidden="true"></i>
+								@endif
+								@endfor
+								<a href="#" class="count-review">({{$product->orderitems->where("rstatus",1)->count()}} review)</a>
+
 						</div>
 						<h2 class="product-name">{{ $product->name }}</h2>
 						<div class="short-desc">
@@ -77,7 +75,7 @@
 						<div class="quantity">
 							<span>Quantity:</span>
 							<div class="quantity-input">
-								<input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
+								<input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*">
 
 								<a class="btn btn-reduce" href="#" wire:click.prevent="reduceQty"></a>
 								<a class="btn btn-increase" href="#" wire:click.prevent="decreaseQty"></a>
@@ -109,13 +107,18 @@
 								<table class="shop_attributes">
 									<tbody>
 										<tr>
-											<th>Weight</th><td class="product_weight">1 kg</td>
+											<th>Weight</th>
+											<td class="product_weight">1 kg</td>
 										</tr>
 										<tr>
-											<th>Dimensions</th><td class="product_dimensions">12 x 15 x 23 cm</td>
+											<th>Dimensions</th>
+											<td class="product_dimensions">12 x 15 x 23 cm</td>
 										</tr>
 										<tr>
-											<th>Color</th><td><p>Black, Blue, Grey, Violet, Yellow</p></td>
+											<th>Color</th>
+											<td>
+												<p>Black, Blue, Grey, Violet, Yellow</p>
+											</td>
 										</tr>
 									</tbody>
 								</table>
@@ -134,38 +137,43 @@
 													<div class="comment-text">
 														<div class="star-rating">
 															<style>
-																.width-0-percent{
-																	width:0%;
+																.width-0-percent {
+																	width: 0%;
 																}
-																.width-20-percent{
-																	width:20%;
+
+																.width-20-percent {
+																	width: 20%;
 																}
-																.width-40-percent{
-																	width:40%;
+
+																.width-40-percent {
+																	width: 40%;
 																}
-																.width-60-percent{
-																	width:60%;
+
+																.width-60-percent {
+																	width: 60%;
 																}
-																.width-80-percent{
-																	width:80%;
+
+																.width-80-percent {
+																	width: 80%;
 																}
-																.width-100-percent{
-																	width:100%;
+
+																.width-100-percent {
+																	width: 100%;
 																}
 															</style>
 
 
-														@foreach($product->orderitems->where("rstatus",1) as $orderIten)
+															@foreach($product->orderitems->where("rstatus",1) as $orderIten)
 															<span class="width-{{ $orderIten->review->raiting * 20  }}-percent">Rated <strong class="rating">5</strong> out of 5</span>
 
 
 														</div>
-														
+
 														<p class="meta">
-															
+
 															<strong class="woocommerce-review__author">{{$orderIten->order->user->name}}</strong>
 															<span class="woocommerce-review__dash">–</span>
-															<time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >{{ Carbon\Carbon::parse($orderIten->review->created_at)->format("Y-m-d H:i:s") }} {{'  '.$orderIten->review->created_at->diffForHumans()}}</time>
+															<time class="woocommerce-review__published-date" datetime="2008-02-14 20:00">{{ Carbon\Carbon::parse($orderIten->review->created_at)->format("Y-m-d H:i:s") }} {{' '.$orderIten->review->created_at->diffForHumans()}}</time>
 														</p>
 														<div class="description">
 															<p>{{ $orderIten->review->comment }}</p>
@@ -178,13 +186,14 @@
 									</div><!-- #comments -->
 									@endif
 
-									
+
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div><!--end main products area-->
+			</div>
+			<!--end main products area-->
 
 			<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 sitebar">
 				<div class="widget widget-our-services ">
@@ -255,13 +264,14 @@
 					</div>
 				</div>
 
-			</div><!--end sitebar-->
+			</div>
+			<!--end sitebar-->
 
 			<div class="single-advance-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="wrap-show-advance-info-box style-1 box-in-site">
 					<h3 class="title-box">Related Products</h3>
 					<div class="wrap-products">
-						<div class="products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"3"},"1200":{"items":"5"}}' >
+						<div class="products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"3"},"1200":{"items":"5"}}'>
 
 							@foreach($related_products as $pr)
 							<div class="product product-style-2 equal-elem ">
@@ -285,12 +295,15 @@
 
 
 						</div>
-					</div><!--End wrap-products-->
+					</div>
+					<!--End wrap-products-->
 				</div>
 			</div>
 
-		</div><!--end row-->
+		</div>
+		<!--end row-->
 
-	</div><!--end container-->
+	</div>
+	<!--end container-->
 
 </main>
