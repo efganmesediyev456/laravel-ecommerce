@@ -180,6 +180,10 @@
                 <input type="file" wire:model="image" class="input-file">
                 
                 <br>
+                <label for="">Images</label>
+                <input type="file" wire:model="images" class="input-file" multiple>
+
+
                
  
                 

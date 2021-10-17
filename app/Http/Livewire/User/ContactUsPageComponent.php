@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\User;
 
 use App\Models\Contact;
+use App\Models\Setting;
 use Livewire\Component;
 
 class ContactUsPageComponent extends Component
@@ -13,7 +14,8 @@ class ContactUsPageComponent extends Component
     public $comment;
     public function render()
     {
-        return view('livewire.user.contact-us-page-component')->layout("layouts.base");
+        $settings=Setting::find(1);
+        return view('livewire.user.contact-us-page-component',compact("settings"))->layout("layouts.base");
     }
 
     public function updated($fields){
