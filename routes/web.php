@@ -4,6 +4,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Livewire\Admin\AdminAddCouponComponent;
 use App\Http\Livewire\Admin\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminCategory;
+use App\Http\Livewire\Admin\AdminContactUsPageComponent;
 use App\Http\Livewire\Admin\AdminCouponComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\AdminEditCouponComponent;
@@ -11,6 +12,7 @@ use App\Http\Livewire\Admin\AdminEditHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminHomeSliderComponent;
 use App\Http\Livewire\Admin\AdminOrderDetailsComponent;
 use App\Http\Livewire\Admin\AdminProductCategory;
+use App\Http\Livewire\Admin\AdminSettingsComponent;
 use App\Http\Livewire\Admin\HomeCountryProduct;
 use App\Http\Livewire\AdminOrderViewComponent;
 use App\Http\Livewire\AdminSalesProduct;
@@ -21,6 +23,8 @@ use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\ThankYouComponent;
+use App\Http\Livewire\User\ChangePasswordUserComponent;
+use App\Http\Livewire\User\ContactUsPageComponent;
 use App\Http\Livewire\User\OrderItemReviewComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\UserDetailDashboardController;
@@ -62,15 +66,13 @@ Route::get('/user/order_item/review/{order_item_id}',OrderItemReviewComponent::c
 
 
 
-
-
-
-
-
 // front
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
    Route::get('user/dashboard',UserDashboardComponent::class)->name('dashboard');
    Route::get('user/dashboard/order/{id}/details',UserDetailDashboardController::class)->name('user.order.detail');
+   Route::get('user/change/password',ChangePasswordUserComponent::class)->name('user.change.password');
+   Route::get('/contact',ContactUsPageComponent::class)->name('user.contact');
+  
 });
 
 //admin
@@ -86,6 +88,9 @@ Route::middleware(['auth:sanctum', 'verified','authadmin'])->group(function () {
    Route::post('ckeditor/upload', [AdminAddHomeSliderComponent::class,'upload_image_cke'])->name('ckeditor.upload');
    Route::get('admin/order',AdminOrderViewComponent::class)->name('admin.order');
    Route::get('admin/order/details/{order_id}',AdminOrderDetailsComponent::class)->name('admin.order.details');
+   Route::get('admin/contact',AdminContactUsPageComponent::class)->name('admin.contact');
+   Route::get('admin/settings',AdminSettingsComponent::class)->name('admin.setting');
+
 });
 
 Route::get("efgan",[TestController::class,"index"]);

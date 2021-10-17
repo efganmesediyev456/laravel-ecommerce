@@ -13,6 +13,7 @@ class OrderItemReviewComponent extends Component
     public $comment;
     public function mount($order_item_id){
         $this->order_item_id=$order_item_id;
+        $this->raiting=5;
     }
     public function render()
     {

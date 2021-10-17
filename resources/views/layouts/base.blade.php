@@ -61,18 +61,22 @@
                                                     <form action="{{ route('logout') }}" method="POST" id="form">
                                                         @csrf
                                                     </form>
+													<li class="menu-item" ><a title="hungary" href="{{ route('dashboard') }}">User Admin Dashboard</a> </li>  	
+													<li class="menu-item" ><a title="hungary" href="{{ route('user.change.password') }}">Change Password</a> </li>  	
                                                 </ul>
                                             </li>
                                         @elseif(Auth::user()->utype=='USR')
                                             <li class="menu-item lang-menu menu-item-has-children parent">
                                                 <a title="English" href="#">My Account  {{ Auth::user()->name }}</a>
                                                 <ul class="submenu lang" >
-                                                <li class="menu-item" ><a title="hungary" href="{{ route('user.dashboard') }}">Dashboard</a> </li>             
+                                                <li class="menu-item" ><a title="hungary" href="{{ route('dashboard') }}">Dashboard</a> </li>             
                                                 <li class="menu-item" ><a title="hungary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('form').submit();">Logout</a></li>
                                                     <form action="{{ route('logout') }}" method="POST" id="form">
                                                         @csrf
                                                     </form>
+													<li class="menu-item" ><a title="hungary" href="{{ route('user.change.password') }}">Change Password</a> </li>  
                                                 </ul>
+													
                                             </li>
                                         @endif
                                     @else
@@ -172,7 +176,7 @@
 									<a href="/checkout" class="link-term mercado-item-title">Checkout</a>
 								</li>
 								<li class="menu-item">
-									<a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>
+									<a href="{{ route('user.contact') }}" class="link-term mercado-item-title">Contact</a>
 								</li>																	
 							</ul>
 						</div>

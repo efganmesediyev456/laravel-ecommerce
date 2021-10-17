@@ -270,6 +270,23 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.setting') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Settings
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ route('admin.contact') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Contact
+              </p>
+            </a>
+          </li>
 
         
 
