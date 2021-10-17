@@ -101,7 +101,18 @@ class AdminProductCategory extends Component
     }
 
     public function deleteProduct($id){
-        Product::find($id)->delete();
+        $product=Product::find($id);
+        if($product->image){
+            unlink("assets/images/products/".$product->image);
+        }
+        if($product->images){
+            $images=explode(",",$product->images);
+            foreach($images as $img){
+                unlink("assets/images/products/".$img);
+            }
+        }
+        $product->delete();
+
         session()->flash('message','Product has been deleted successfully');
     }
 
