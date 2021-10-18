@@ -47,7 +47,7 @@ Route::get('/',HomeComponent::class);
 
 Route::get('/shop',ShopComponent::class)->name("shop");
 
-Route::get('/checkout',CheckoutComponent::class)->name("checkout");
+Route::get('/checkout',CheckoutComponent::class)->middleware('cartCount')->name("checkout");
 
 Route::get('/card',CardComponent::class)->name('product.cart');
 
