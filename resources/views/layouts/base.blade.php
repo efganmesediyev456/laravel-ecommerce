@@ -63,6 +63,7 @@
                                                     </form>
 													<li class="menu-item" ><a title="hungary" href="{{ route('dashboard') }}">User Admin Dashboard</a> </li>  	
 													<li class="menu-item" ><a title="hungary" href="{{ route('user.change.password') }}">Change Password</a> </li>  	
+													<li class="menu-item" ><a title="hungary" href="{{ route('user.profile') }}">Profile</a> </li>  	
                                                 </ul>
                                             </li>
                                         @elseif(Auth::user()->utype=='USR')
