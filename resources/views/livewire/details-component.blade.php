@@ -128,45 +128,46 @@
 								<div class="wrap-review-form">
 
 									@if($product->orderitems->where("rstatus",1)->count() > 0)
+									<style>
+										.width-0-percent {
+											width: 0%;
+										}
+
+										.width-20-percent {
+											width: 20%;
+										}
+
+										.width-40-percent {
+											width: 40%;
+										}
+
+										.width-60-percent {
+											width: 60%;
+										}
+
+										.width-80-percent {
+											width: 80%;
+										}
+
+										.width-100-percent {
+											width: 100%;
+										}
+									</style>
 									<div id="comments">
 										<h2 class="woocommerce-Reviews-title">{{$product->orderitems->where("rstatus",1)->count()}} review for <span>{{ $product->name }}</span></h2>
 										<ol class="commentlist">
 											<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-20">
 												<div id="comment-20" class="comment_container">
-													<img alt="" src="{{ asset('assets/images/author-avata.jpg') }}" height="80" width="80">
+
+
+
+
+													@foreach($product->orderitems->where("rstatus",1) as $orderIten)
+
+													<img alt="" src="{{ asset('assets/images/products/'.$orderIten->order->user->profile->image) }}" height="80" width="80">
 													<div class="comment-text">
 														<div class="star-rating">
-															<style>
-																.width-0-percent {
-																	width: 0%;
-																}
-
-																.width-20-percent {
-																	width: 20%;
-																}
-
-																.width-40-percent {
-																	width: 40%;
-																}
-
-																.width-60-percent {
-																	width: 60%;
-																}
-
-																.width-80-percent {
-																	width: 80%;
-																}
-
-																.width-100-percent {
-																	width: 100%;
-																}
-															</style>
-
-
-															@foreach($product->orderitems->where("rstatus",1) as $orderIten)
 															<span class="width-{{ $orderIten->review->raiting * 20  }}-percent">Rated <strong class="rating">5</strong> out of 5</span>
-
-
 														</div>
 
 														<p class="meta">
@@ -178,8 +179,9 @@
 														<div class="description">
 															<p>{{ $orderIten->review->comment }}</p>
 														</div>
-														@endforeach
+														
 													</div>
+													@endforeach
 												</div>
 											</li>
 										</ol>

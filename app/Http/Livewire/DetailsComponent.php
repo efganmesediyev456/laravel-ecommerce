@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class DetailsComponent extends Component
 {
@@ -36,6 +37,7 @@ class DetailsComponent extends Component
         $product=Product::whereSlug($this->slug)->first();
         $popular_products=Product::inRandomOrder()->limit(4)->get();
         $related_products=Product::where('category_id',$product->category_id)->inRandomOrder()->limit(5)->get();
+        
         return view('livewire.details-component',compact('product','popular_products','related_products'))->layout('layouts.base');
     }
 }

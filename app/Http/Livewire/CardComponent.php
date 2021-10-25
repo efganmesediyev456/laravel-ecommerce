@@ -51,7 +51,11 @@ class CardComponent extends Component
     public function render()
     {
         
-       
+        if(Auth::check()){
+            Cart::instance("cart")->store(Auth::user()->email);
+            Cart::instance("wishlist")->store(Auth::user()->email);
+            Cart::instance("saveForLater")->store(Auth::user()->email);
+        }
        
 
         if(session()->has("coupon")){
